@@ -185,4 +185,6 @@ class MatrizDispersa():
         with open(dot, 'w') as f:
             f.write(grafo)
         result = "matriz_{}.pdf".format(nombre)
-        os.system("dot -Tpdf " + dot + " -o " + result) 
+        os.system("dot -Tpdf " + dot + " -o " + result)
+        
+         

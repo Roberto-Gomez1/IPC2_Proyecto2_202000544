@@ -8,23 +8,24 @@ from help import Leer_Archivo
 import webbrowser
 from lectura import lectura
 
+arch=''
 def boton_cargaArchivo_command():
+    
     arch = Leer_Archivo()
-    print(arch)
-    lectura.leer(arch)
+    ruta.insert(tk.INSERT, arch)
+    #print(arch)
+    #lectura.leer(arch)
+    lectura.pru(arch)
 
 def salir_interfaz():
     sys.exit()
 
-
-def guardar_Archivo():
-    Tk().withdraw()
-    filedir = filedialog.askopenfilename(filetypes=[("Archivo data","*.form")])
-    #texto = textt.get(1.0,'end')
-    with open(filedir,"r+",encoding = "utf-8") as f:
-        f.truncate(0)
-        #f.write(texto)
-    
+def generar_espe():
+    nombreciudad = textt.get(1.0,'end').replace(' ','').replace('\n','')
+    direccion = ruta.get(1.0,'end').replace(' ','').replace('\n','')
+    lectura.generar(direccion,nombreciudad)
+    #print(nombreciudad)
+    #print(direccion)
 
 
 
@@ -43,31 +44,30 @@ cArchivo["text"] = "Cargar archivo"
 cArchivo.place(x=40,y=10,width=121,height=50)
 cArchivo["command"] = boton_cargaArchivo_command 
 
-
-guardar=tk.Button(root)
-guardar["font"] = fuente
-guardar["justify"] = "center"
-guardar["text"] = "Guardar archivo"
-guardar.place(x=190,y=10,width=121,height=50)
-guardar["command"] = guardar_Archivo 
+textt = tk.Text(root)
+textt["font"] = fuente
+textt.place(x=200,y=30,width= 100, height=30)
 
 
+ruta = tk.Text(root)
+ruta["font"] = fuente
+ruta.place(x=600,y=30,width= 100, height=30)
 
-generar=tk.Button(root)
-generar["font"] = fuente
-generar["justify"] = "center"
-generar["text"] = "Salir del Sistema"
-generar.place(x=40,y=80,width=121,height=50)
-generar["command"] = salir_interfaz 
-
-
-
-salir = tk.Button(root)
+salir=tk.Button(root)
 salir["font"] = fuente
 salir["justify"] = "center"
-salir["text"] = "Sin opcion"
-salir.place(x=190,y=80,width=121,height=50)
-#salir["command"] = salir_interfaz 
+salir["text"] = "Salir del Sistema"
+salir.place(x=40,y=80,width=121,height=50)
+salir["command"] = salir_interfaz 
+
+
+
+generar = tk.Button(root)
+generar["font"] = fuente
+generar["justify"] = "center"
+generar["text"] = "Generar"
+generar.place(x=190,y=80,width=121,height=50)
+generar["command"] = generar_espe 
 
 
 fram.pack()
