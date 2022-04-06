@@ -74,6 +74,55 @@ class MatrizDispersa():
                         else:
                             aux2 = aux2.abajo
 
+
+
+    def buscarEntrada(self):
+        aux = self.filas.primero
+        while aux is not None:
+            nodoEntrada = aux.acceso
+            while nodoEntrada is not None:
+                if nodoEntrada.caracter == 'E':
+                    print("Pos X: " + str(nodoEntrada.x), " Pos Y: " + str(nodoEntrada.y))
+                    return nodoEntrada
+                nodoEntrada = nodoEntrada.derecha
+            aux = aux.siguiente
+        return False
+    def buscar(self):
+        tmp = self.filas.primero
+        while tmp is not None:
+            nodoCivil = tmp.acceso
+            while nodoCivil is not None:
+                if nodoCivil.caracter == 'C':
+                    print("Pos X: " + str(nodoCivil.x), " Pos Y: " + str(nodoCivil.y))
+                    return nodoCivil
+                nodoCivil = nodoCivil.derecha
+            tmp = tmp.siguiente
+        return False
+
+    def camino(self,entrada):
+        while entrada is not None:
+            if entrada.arriba.caracter == "C":
+                break
+            elif entrada.izquierda.caracter == "C":
+                break
+            elif entrada.derecha.caracter == "C":
+                break
+            elif entrada.abajo.caracter == "C":
+                break
+            
+            elif entrada.izquierda.caracter == ' ':
+                entrada.izquierda.caracter = '='
+                entrada = entrada.izquierda
+            elif entrada.abajo.caracter == ' ':
+                entrada.abajo.caracter = '='
+                entrada = entrada.abajo
+            elif entrada.arriba.caracter == ' ':
+                entrada.arriba.caracter = '='
+                entrada = entrada.arriba
+            elif entrada.derecha.caracter == ' ':
+                entrada.derecha.caracter = '='
+                entrada = entrada.derecha
+        
     def graficarDot(self, nombre):
         grafo = 'digraph T{ \nnode[shape=box fontname="Arial" fillcolor="white" style=filled width=1.98 height=1.98 ]'
         grafo += '\nedge[style = invis]'
@@ -134,6 +183,8 @@ class MatrizDispersa():
                     grafo += 'N{}_{}[label="{}",group="{}", fillcolor="green"];\n'.format(aux2.x, aux2.y, aux2.caracter, int(aux2.y)+1)
                 if aux2.caracter == 'U':
                     grafo += 'N{}_{}[label="{}",group="{}", fillcolor="red"];\n'.format(aux2.x, aux2.y, aux2.caracter, int(aux2.y)+1)
+                if aux2.caracter == 'V':
+                    grafo += 'N{}_{}[label="{}",group="{}", fillcolor="yellow"];\n'.format(aux2.x, aux2.y, aux2.caracter, int(aux2.y)+1)
                 if aux2.caracter == ' ':
                     grafo += 'N{}_{}[label="{}",group="{}", fillcolor="white"];\n'.format(aux2.x, aux2.y, aux2.caracter, int(aux2.y)+1)             
                 aux2 = aux2.derecha

@@ -85,10 +85,30 @@ class lectura:
             prueba =item.iter('ciudad')      
             for aa in prueba:
                 ciudad = aa[0].text
-                temp = ciudades2(ciudad)
+                temp = ciudades2(ciudad,None,None)
                 auxiliar.ciudad.insertar(temp)
+            for uu in item.iter('robot'):
+                    x=0
+                    for n in uu.iter('nombre'):
+                        x+=1
+                        nombre = uu[x-1].text
+                        tipo = uu[x-1].attrib['tipo']
+                        if tipo == 'ChapinRescue':
+                            aux= ciudades2(nombre,tipo,0)
+                            auxiliar.ciudad.insertar(aux)
+                            pass
+                        else:
+                            capacidad= uu[x-1].attrib['capacidad']
+                            aux1= ciudades2(nombre,tipo,capacidad)
+                            auxiliar.ciudad.insertar(aux1)
         url.mostrar()
+        print("-------Ciudades a elegir-------------")
         auxiliar.ciudad.mostrar()
+        print("-------Misiones a elegir:-------------")
+        print("Rescate")
+        print("Extraccion")
+        print("-------Robots a Elegir-------------")
+        auxiliar.ciudad.mostrar2()
 
     def generar(entrada,nombre):
         url = listarutas()
@@ -100,7 +120,7 @@ class lectura:
             prueba =item.iter('ciudad')      
             for aa in prueba:
                 ciudad = aa[0].text
-                while url is not None:
+                if nombre == ciudad:
                     filas = aa[0].attrib['filas']
                     columnas = aa[0].attrib['columnas']
                     temporal = ciudades(ciudad)
@@ -139,7 +159,9 @@ class lectura:
                         ubicacionY = aa[it].attrib['columna']
                         n4 = NodoInterno(int(ubicacionX),int(ubicacionY),'U')
                         temporal.patrones.insertar(n4)
-                    
+                    #fkj = temporal.patrones.buscar()
+                    #xcu = temporal.patrones.buscarEntrada()
+                    #temporal.patrones.camino(xcu)
                     temporal.patrones.graficarDot(ciudad)
                 for uu in item.iter('robot'):
                     x=0
