@@ -81,12 +81,29 @@ class lectura:
         root = tree.getroot()
         auxiliar = rutas(entrada)
         url.insertar(auxiliar)
+        print("-------Ciudades a elegir-------------")
         for item in root: 
             prueba =item.iter('ciudad')      
             for aa in prueba:
+                
                 ciudad = aa[0].text
-                temp = ciudades2(ciudad,None,None)
+                print(ciudad)
+                temp = ciudades2(ciudad,None,'')
                 auxiliar.ciudad.insertar(temp)
+                it=0
+                for ee in aa.iter('fila'):
+                    it +=1
+                    numero = aa[it].attrib['numero']
+                    fila = aa[it].text
+                    it1 = 0
+                    for ii in str(fila):
+                        it1+=1
+                        if ii == "C":
+                            print("Punto de Civiles: ","X: ",int(numero),"Y: ",int(it1))
+                            #auxiliar.ciudad.insertar(n2)
+                        if ii == "E":
+                            print("Punto de Entrada: ","X:", int(numero),"Y: ",int(it1))
+                            #auxiliar.ciudad.insertar(n4)   
             for uu in item.iter('robot'):
                     x=0
                     for n in uu.iter('nombre'):
@@ -101,14 +118,14 @@ class lectura:
                             capacidad= uu[x-1].attrib['capacidad']
                             aux1= ciudades2(nombre,tipo,capacidad)
                             auxiliar.ciudad.insertar(aux1)
-        url.mostrar()
-        print("-------Ciudades a elegir-------------")
-        auxiliar.ciudad.mostrar()
+        #url.mostrar()
         print("-------Misiones a elegir:-------------")
         print("Rescate")
         print("Extraccion")
         print("-------Robots a Elegir-------------")
         auxiliar.ciudad.mostrar2()
+        auxiliar.ciudad.mostrar3()
+        
 
     def generar(entrada,nombre):
         url = listarutas()
@@ -159,9 +176,9 @@ class lectura:
                         ubicacionY = aa[it].attrib['columna']
                         n4 = NodoInterno(int(ubicacionX),int(ubicacionY),'U')
                         temporal.patrones.insertar(n4)
-                    #fkj = temporal.patrones.buscar()
-                    #xcu = temporal.patrones.buscarEntrada()
-                    #temporal.patrones.camino(xcu)
+                    fkj = temporal.patrones.reC()
+                    xcu = temporal.patrones.reEntrada()
+                    #temporal.patrones.camino(xcu,fkj)
                     temporal.patrones.graficarDot(ciudad)
                 for uu in item.iter('robot'):
                     x=0
@@ -178,5 +195,5 @@ class lectura:
                             aux1= robots(x,nombre,tipo,capacidad)
                             robo.insertar(aux1)
         
-        robo.mostrar()
-        listaCiudades.mostrar()
+        #robo.mostrar()
+        #listaCiudades.mostrar()

@@ -82,28 +82,54 @@ class MatrizDispersa():
             nodoEntrada = aux.acceso
             while nodoEntrada is not None:
                 if nodoEntrada.caracter == 'E':
-                    print("Pos X: " + str(nodoEntrada.x), " Pos Y: " + str(nodoEntrada.y))
+                    print("Punto de Entrada: "+"Pos X: " + str(nodoEntrada.x), " Pos Y: " + str(nodoEntrada.y))
+                nodoEntrada = nodoEntrada.derecha
+            aux = aux.siguiente
+        return False
+
+    def reEntrada(self):
+        aux = self.filas.primero
+        while aux is not None:
+            nodoEntrada = aux.acceso
+            while nodoEntrada is not None:
+                if nodoEntrada.caracter == 'E':
                     return nodoEntrada
                 nodoEntrada = nodoEntrada.derecha
             aux = aux.siguiente
         return False
-    def buscar(self):
-        tmp = self.filas.primero
-        while tmp is not None:
-            nodoCivil = tmp.acceso
+
+    def buscarC(self):
+        aux = self.filas.primero
+        while aux is not None:
+            nodoCivil = aux.acceso
             while nodoCivil is not None:
                 if nodoCivil.caracter == 'C':
-                    print("Pos X: " + str(nodoCivil.x), " Pos Y: " + str(nodoCivil.y))
+                    print("Punto de Civiles: "+"Pos X: " + str(nodoCivil.x), " Pos Y: " + str(nodoCivil.y))
                     return nodoCivil
                 nodoCivil = nodoCivil.derecha
-            tmp = tmp.siguiente
+            aux = aux.siguiente
         return False
 
-    def camino(self,entrada):
+
+    def reC(self):
+        aux = self.filas.primero
+        while aux is not None:
+            nodoCivil = aux.acceso
+            while nodoCivil is not None:
+                if nodoCivil.caracter == 'C':
+                    #print("Punto de Civiles: "+"Pos X: " + str(nodoCivil.x), " Pos Y: " + str(nodoCivil.y))
+                    return nodoCivil
+                nodoCivil = nodoCivil.derecha
+            aux = aux.siguiente
+        return False
+
+
+    def camino(self,entrada,Civil):
         while entrada is not None:
             if entrada.arriba.caracter == "C":
+                print("hola")
                 break
-            elif entrada.izquierda.caracter == "C":
+            '''elif entrada.izquierda.caracter == "C":
                 break
             elif entrada.derecha.caracter == "C":
                 break
@@ -111,17 +137,17 @@ class MatrizDispersa():
                 break
             
             elif entrada.izquierda.caracter == ' ':
-                entrada.izquierda.caracter = '='
+                entrada.izquierda.caracter = 'V'
                 entrada = entrada.izquierda
             elif entrada.abajo.caracter == ' ':
-                entrada.abajo.caracter = '='
+                entrada.abajo.caracter = 'V'
                 entrada = entrada.abajo
             elif entrada.arriba.caracter == ' ':
-                entrada.arriba.caracter = '='
+                entrada.arriba.caracter = 'V'
                 entrada = entrada.arriba
             elif entrada.derecha.caracter == ' ':
-                entrada.derecha.caracter = '='
-                entrada = entrada.derecha
+                entrada.derecha.caracter = 'V'
+                entrada = entrada.derecha'''
         
     def graficarDot(self, nombre):
         grafo = 'digraph T{ \nnode[shape=box fontname="Arial" fillcolor="white" style=filled width=1.98 height=1.98 ]'

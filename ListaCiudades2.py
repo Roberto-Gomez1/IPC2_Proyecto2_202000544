@@ -33,6 +33,11 @@ class listaSimple2:
         while actual != None:
             if actual.ciudades.tipo =="ChapinFighter":
                 print("AuxRobot: ", actual.ciudades.ciudad,"Tipo:",actual.ciudades.tipo,"Poder:",actual.ciudades.poder)
-            elif actual.ciudades.tipo =="ChapinRescue":
+            actual = actual.siguiente
+    def mostrar3(self):
+        actual = self.primero
+        while actual != None:
+            if actual.ciudades.poder == 0:
                 print("AuxRobot: ", actual.ciudades.ciudad,"Tipo:",actual.ciudades.tipo,"Poder:",actual.ciudades.poder)
             actual = actual.siguiente
+            
